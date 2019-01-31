@@ -164,10 +164,15 @@ var module = (function() {
   // outside our lexical scope
   return {
     // Code here.
-    
+    publicMethod: () => {
+      var privRes = privateMethod();
+      return privRes
+    }
   };
 })();
 
+
+module.publicMethod()
 
 
 ////////// PROBLEM 7 //////////
@@ -184,6 +189,14 @@ function secretNumber() {
 
   return {
     // Code here
+    addToSecret: (numAdd) => {
+      secret += numAdd
+      return secret
+    },
+    takeAwayFromSecret: (numSub) => {
+      secret -= numSub
+      return secret
+    }
   };
 }
 
@@ -209,9 +222,12 @@ function secretNumber() {
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-      console.log(i);
-    }, i * 1000);
+    function saveI(i){
+      setTimeout(function() {
+        console.log(i);
+      }, i * 1000);
+    }
+    saveI(i)
   }
 }
 timeOutCounter();
